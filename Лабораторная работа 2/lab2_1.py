@@ -25,29 +25,12 @@ class Book:
         return f'{self.__class__.__name__}(id_={self.id_}, name={self.name!r}, pages={self.pages})'
 
 
-class Library:
-    def __init__(self, books: list = []):
-        self.books = books
-
-    def get_next_book_id(self) -> int:
-        return len(self.books) + 1
-
-    def get_index_by_book_id(self, id_: int) -> int:
-        list_id = [value.id_ for index, value in enumerate(self.books)]
-        if id_ in list_id:
-            return list_id.index(id_)
-        else:
-            raise ValueError('Книги с запрашиваемым id не существует')
-
-
 if __name__ == '__main__':
-    empty_library = Library()  # инициализируем пустую библиотеку
-    print(empty_library.get_next_book_id())  # проверяем следующий id для пустой библиотеки
-
+    # инициализируем список книг
     list_books = [
         Book(id_=book_dict["id"], name=book_dict["name"], pages=book_dict["pages"]) for book_dict in BOOKS_DATABASE
     ]
-    library_with_books = Library(books=list_books)  # инициализируем библиотеку с книгами
-    print(library_with_books.get_next_book_id())  # проверяем следующий id для непустой библиотеки
+    for book in list_books:
+        print(book)  # проверяем метод __str__
 
-    print(library_with_books.get_index_by_book_id(1))  # проверяем индекс книги с id = 1
+    print(list_books)  # проверяем метод __repr__
